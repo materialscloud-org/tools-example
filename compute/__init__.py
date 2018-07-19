@@ -3,9 +3,9 @@ from flask import Blueprint
 
 blueprint = Blueprint('compute', __name__, url_prefix='/compute')
 
-@blueprint.route('/register')
-def register():
-    return "register view"
+@blueprint.route('/process_structure')
+def process_structure():
+    return "TO DO"
 
 # @bp.route('/process_data/', methods=['GET', 'POST'])
 # def process_data():

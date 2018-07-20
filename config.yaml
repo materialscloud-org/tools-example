@@ -16,6 +16,12 @@ page_title: "A simple tool example"
 templates:
   how_to_cite: "how_to_cite.html"
   about: "custom_about.html"
-  select_content: "select_content.html"
+  select_content: "visualizer_select_structure.html"
 
 use_upload_structure_block: True
+
+additional_accordion_entries:
+  - header: "What is this?"
+    template_page: what_is.html
+  - header: "Acknowledgements"
+    template_page: ack.html

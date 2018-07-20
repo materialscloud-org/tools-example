@@ -1,55 +1,35 @@
+import logging
 import flask
 from flask import Blueprint
-
+import io
 blueprint = Blueprint('compute', __name__, url_prefix='/compute')
 
-@blueprint.route('/process_structure')
+logger = logging.getLogger('tools-app')
+
+@blueprint.route('/process_structure/', methods=['GET', 'POST'])
 def process_structure():
-    return "TO DO"
+    if flask.request.method == 'POST':
+        structurefile = flask.request.files['structurefile']
+        fileformat = flask.request.form.get('fileformat', 'unknown')
+        filecontent = structurefile.read().decode('utf-8')
 
-# @bp.route('/process_data/', methods=['GET', 'POST'])
-# def process_data():
-#     """
-#     Process data (uploaded from POST request)
-#     """
-#     if flask.request.method == 'POST':
-#         try:
-#             data_for_template = process_data_core(
-#                 module_version="",
-#                 call_source="process_data",
-#                 logger=logger,
-#                 flask_request=flask.request)
-#             config_dict = get_config()
-#             return flask.render_template(
-#                 get_visualizer_template(flask.request), config=config_dict['config'], **data_for_template)
-#         except FlaskRedirectException as e:
-#             flask.flash(str(e))
-#             return flask.redirect(flask.url_for('input_data'))
-#         except Exception:
-#             flask.flash("Unable to process the data, sorry...")
-#             return flask.redirect(flask.url_for('input_data'))
+        try:
+            return "FORMAT: {}<br>CONTENT:<br><code><pre>{}</pre></code>".format(fileformat, filecontent)
+        #except FlaskRedirectException as e:
+            #flask.flash(str(e))
+            #return flask.redirect(flask.url_for('input_data'))
+        except Exception:
+            flask.flash("Unable to process the data, sorry...")
+            return flask.redirect(flask.url_for('input_data'))
 
-#     else:  # GET Request
-#         return flask.redirect(flask.url_for('input_data'))
+    else:
+        return flask.redirect(flask.url_for('compute.process_structure_example'))
+        #flask.flash("Redirecting...")
+        #return flask.redirect(flask.url_for('input_data'))
 
-
-# @pb.route('/process_example_data/', methods=['GET', 'POST'])
-# def process_example_data():
-#     """
-#     Process an example data file (example name from POST request)
-#     """
-#     if flask.request.method == 'POST':
-#         try:
-#             data_for_template = process_data_core(
-#                 module_version="",
-#                 call_source="process_example_data",
-#                 logger=logger,
-#                 flask_request=flask.request)
-#             return flask.render_template(
-#                 get_visualizer_template(flask.request), config=config, **data_for_template)
-#         except FlaskRedirectException as e:
-#             flask.flash(str(e))
-#             return flask.redirect(flask.url_for('input_data'))
-#
-#    else:  # GET Request
-#        return flask.redirect(flask.url_for('input_data'))
+@blueprint.route('/process_example_structure/', methods=['GET', 'POST'])
+def process_structure_example():
+    if flask.request.method == 'POST':
+        return "This was a POST"
+    else:
+        return "This was a GET"

@@ -13,6 +13,9 @@ page_title: "A simple tool example"
 #  process_data:
 #    - custom.js
 
+about_section_title: "About new tool"
+
+
 templates:
   how_to_cite: "how_to_cite.html"
   about: "custom_about.html"

@@ -1,7 +1,6 @@
 import logging
 import flask
 from flask import Blueprint
-import io
 blueprint = Blueprint('compute', __name__, url_prefix='/compute')
 
 logger = logging.getLogger('tools-app')
@@ -15,17 +14,12 @@ def process_structure():
 
         try:
             return "FORMAT: {}<br>CONTENT:<br><code><pre>{}</pre></code>".format(fileformat, filecontent)
-        #except FlaskRedirectException as e:
-            #flask.flash(str(e))
-            #return flask.redirect(flask.url_for('input_data'))
         except Exception:
             flask.flash("Unable to process the data, sorry...")
             return flask.redirect(flask.url_for('input_data'))
-
     else:
         return flask.redirect(flask.url_for('compute.process_structure_example'))
-        #flask.flash("Redirecting...")
-        #return flask.redirect(flask.url_for('input_data'))
+
 
 @blueprint.route('/process_example_structure/', methods=['GET', 'POST'])
 def process_structure_example():

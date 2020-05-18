@@ -1,25 +1,13 @@
-window_title: "Materials Cloud Tools: an example app"
-page_title: "A simple tool example"
+window_title: "Materials Cloud Tools: an example tool (tools-example)"
+page_title: "A simple tool example: tools-example"
 
-#custom_css_files:
-# input_data:
-#    - custom.css
-#  process_data:
-#    - custom.css
-
-#custom_js_files:
-#  input_data:
-#    - custom.js
-#  process_data:
-#    - custom.js
-
-about_section_title: "About new tool"
-
+about_section_title: "About the tools-example tool"
 
 templates:
   how_to_cite: "how_to_cite.html"
   about: "custom_about.html"
-  select_content: "visualizer_select_structure.html"
+  select_content: "additional_selection.html"
+  # upload_structure_additional_content: "upload_structure_additional_content.html" # if the upload structure block is present, you can add additional content right above the 'submit' button, if you want (e.g. a disclaimer, terms of use, ...)
 
 use_upload_structure_block: True
 

@@ -5,9 +5,9 @@ import logging
 import flask
 from tools_barebone.structure_importers import get_structure_tuple, UnknownFormatError
 
-blueprint = flask.Blueprint('compute', __name__, url_prefix='/compute')
+blueprint = flask.Blueprint("compute", __name__, url_prefix="/compute")
 
-logger = logging.getLogger('tools-app')
+logger = logging.getLogger("tools-app")
 
 
 @blueprint.route("/process_structure/", methods=["POST"])
@@ -69,20 +69,22 @@ def process_structure():
             sort_keys=True,
         )
     }
-    return flask.render_template("user_templates/tools_example.html", **data_for_template)
+    return flask.render_template(
+        "user_templates/tools_example.html", **data_for_template
+    )
 
 
-@blueprint.route('/process_example_value/', methods=['GET', 'POST'])
+@blueprint.route("/process_example_value/", methods=["GET", "POST"])
 def process_structure_example():
     """Processing the endpoint /compute/process_example_value/.
 
     This is called by the additional HTML form added in user_templates/additional_selection.html.
-    
+
     Note that this is just for testing purposes: in reality you want to
     use `flask.render_template` as in the example above, rather than
     just returning a string, as you will need to pass the
     full HTML headers."""
-    if flask.request.method == 'POST':
+    if flask.request.method == "POST":
         # This is the `value` of the option tag, not the text shown to the user
         value = flask.request.form.get("examplevalue", "UNKNOWN")
         return "This was a POST request, with value <pre>{}</pre>".format(value)

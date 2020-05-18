@@ -1,4 +1,3 @@
-import json
 import os
 
 import pytest
@@ -18,7 +17,7 @@ STRUCTURE_EXAMPLES_PATH = os.path.join(
 @pytest.mark.nondestructive
 def test_binput_data_page(selenium):
     """Check the page that is shown by default.
-    
+
     Check that it contains the structure selector from tools-barebone."""
     selenium.get(TEST_URL)
 
@@ -50,10 +49,7 @@ def get_file_examples():
     a list of filename relative paths."""
     retval = []
     for filename in os.listdir(STRUCTURE_EXAMPLES_PATH):
-        if (
-            filename.endswith("~")
-            or filename.startswith(".")
-        ):
+        if filename.endswith("~") or filename.startswith("."):
             continue
         retval.append(filename)
 
@@ -68,7 +64,7 @@ def submit_xsf_structure(selenium, file_abspath):
 
     # Select format
     format_selector = selenium.find_element_by_id("fileformatSelect")
-    Select(format_selector).select_by_value('xsf-ase')
+    Select(format_selector).select_by_value("xsf-ase")
 
     # Submit form
     # selenium.find_element_by_xpath("//input[@value='Calculate my structure']").click()
@@ -78,9 +74,7 @@ def submit_xsf_structure(selenium, file_abspath):
 
 
 @pytest.mark.nondestructive
-@pytest.mark.parametrize(
-    "file_relpath", get_file_examples()
-)
+@pytest.mark.parametrize("file_relpath", get_file_examples())
 def test_send_structure(selenium, file_relpath):
     """Test submitting various files."""
     selenium.get(TEST_URL)
@@ -92,15 +86,13 @@ def test_send_structure(selenium, file_relpath):
     # We should have been redirected back to /
     assert urlparse(selenium.current_url).path == "/compute/process_structure/"
 
-    assert 'Successfully parsed structure tuple' in selenium.page_source
+    assert "Successfully parsed structure tuple" in selenium.page_source
+
 
 @pytest.mark.nondestructive
 @pytest.mark.parametrize(
-    "example_value, example_value_readable_string", [
-        ["YES-val", "Yes"],
-        ["NO-val", "No"],
-        ["MAYBE-val", "Maybe"],
-    ]
+    "example_value, example_value_readable_string",
+    [["YES-val", "Yes"], ["NO-val", "No"], ["MAYBE-val", "Maybe"],],
 )
 def test_send_example_value(selenium, example_value, example_value_readable_string):
     """Test submitting various test values."""

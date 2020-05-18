@@ -50,4 +50,4 @@ jobs:
           pip freeze
 
       - name: Build the Docker image
-        run: ./admin-tools/build-docker.sh && ./admin-tools/run-docker.sh &&  ./.ci/wait-for-it.sh localhost:8091 -t 120 && sleep 5 && pytest --driver Chrome
+        run: ./admin-tools/build-docker.sh && ./admin-tools/run-docker.sh &&  .ci/wait-for-it.sh localhost:8091 -t 120 && sleep 5 && pytest --driver Chrome
